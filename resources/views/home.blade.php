@@ -22,6 +22,10 @@
                   <div class="d-flex align-items-between">
                     <a class="btn btn-success w-50 m-1" href="{{ route('category.create') }}">Add new category</a>
                   </div>
+
+                  <div class="d-flex align-items-between">
+                    <a class="btn btn-success w-50 m-1" href="{{ route('subcategory.create') }}">Add new Subcategory</a>
+                  </div>
                 </div>
             </div>
         </div>

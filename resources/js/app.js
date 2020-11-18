@@ -7,6 +7,9 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import Form from './Form';
+
+window.Form = Form;
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,7 +22,8 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('show-category-component', require('./components/ShowCategoryComponent.vue').default);
+//Vue.component('show-category-component', require('./components/ShowCategoryComponent.vue').default);
+Vue.component('domain-register', require('./components/DomianRegisterComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

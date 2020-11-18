@@ -16,7 +16,7 @@
         </div>
 
         <div class="py-5">
-          <a class="btn btn-primary" href="#">Submit your domain</a>
+        <a class="btn btn-primary" href="{{ route('domain.create') }}">Submit your domain</a>
         </div>
 
       </div>

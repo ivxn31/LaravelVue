@@ -39,6 +39,10 @@
                 <input type="text" class="form-control">
             </div>
             
+            <div class="form-group">
+                <vue-editor/>
+            </div>
+
             <button type="submit" class="btn btn-success">Submit your Domain</button>
         </form>
     </div>

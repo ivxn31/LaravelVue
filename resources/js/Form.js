@@ -43,7 +43,7 @@ class Errors {
      * @param {object} errors
      */
     record(errors) {
-        this.errors = errors;
+        this.errors = errors.errors;
     }
 
 
@@ -191,3 +191,5 @@ class Form {
         this.errors.record(errors);
     }
 }
+
+export default Form;

@@ -1957,9 +1957,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['categories', 'subcategories'],
   data: function data() {
-    return {};
+    return {
+      form: new Form({
+        email: '',
+        title: '',
+        url: '',
+        shortdesc: '',
+        desc: '',
+        category_id: 1,
+        subcategory_id: ''
+      })
+    };
+  },
+  methods: {
+    submitDomain: function submitDomain() {
+      var _this = this;
+
+      var data = new FormData();
+      data.append('title', this.form.title);
+      data.append('email', this.form.email);
+      data.append('url', this.form.url);
+      data.append('shortdesc', this.form.shortdesc);
+      data.append('desc', this.form.desc);
+      data.append('category_id', this.form.category_id);
+      data.append('subcategory_id', this.form.subcategory_id);
+
+      if (document.getElementById('img').files[0]) {
+        data.append('img', document.getElementById('img').files[0]);
+      }
+
+      axios.post('/domain', data).then(function (response) {
+        _this.form.reset();
+      })["catch"](function (error) {
+        return _this.form.errors.record(error.response.data);
+      });
+    }
+  },
+  computed: {
+    filteredSubcategories: function filteredSubcategories() {
+      var _this2 = this;
+
+      return this.subcategories.filter(function (item) {
+        return item.category_id == _this2.form.category_id;
+      });
+    }
   }
 });
 
@@ -51200,89 +51248,269 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("form", { attrs: { action: "" } }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _vm._m(2),
-      _vm._v(" "),
-      _vm._m(3),
-      _vm._v(" "),
-      _vm._m(4),
-      _vm._v(" "),
-      _vm._m(5),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [_c("vue-editor")], 1),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-success", attrs: { type: "submit" } },
-        [_vm._v("Submit your Domain")]
-      )
-    ])
+    _c(
+      "form",
+      {
+        attrs: { action: "", method: "POST", enctype: "multipart/form-data" },
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.submitDomain($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "category" } }, [
+            _vm._v("Select a category")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.category_id,
+                  expression: "form.category_id"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { name: "", id: "category" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.form,
+                    "category_id",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            _vm._l(this.categories, function(category) {
+              return _c("option", { domProps: { value: category.id } }, [
+                _vm._v(_vm._s(category.name))
+              ])
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "subcategory" } }, [
+            _vm._v("Select a subcategory if you wish")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.subcategory_id,
+                  expression: "form.subcategory_id"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { name: "", id: "subcategory" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.form,
+                    "subcategory_id",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            _vm._l(this.filteredSubcategories, function(subcategory) {
+              return _c("option", { domProps: { value: subcategory.id } }, [
+                _vm._v(_vm._s(subcategory.name))
+              ])
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-row" }, [
+          _c("div", { staticClass: "form-group col-md-6" }, [
+            _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.from.email,
+                  expression: "from.email"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "email",
+                placeholder: "Please enter your email Address"
+              },
+              domProps: { value: _vm.from.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.from, "email", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-6" }, [
+            _c("label", { attrs: { for: "url" } }, [
+              _vm._v("Enter your Domian URL")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.from.url,
+                  expression: "from.url"
+                }
+              ],
+              staticClass: "form-control",
+              class: { "is-valid": _vm.form.errors.has("url") },
+              attrs: { type: "text", placeholder: "https://ypur-domain.com" },
+              domProps: { value: _vm.from.url },
+              on: {
+                keydown: function($event) {
+                  return _vm.form.errors.clear("url")
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.from, "url", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.from.errors.has("url"),
+                  expression: "from.errors.has('url')"
+                }
+              ],
+              staticClass: "invalid-feedback",
+              domProps: { textContent: _vm._s(_vm.form.errors.get("url")) }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "title" } }, [
+            _vm._v("Title of your domain")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.from.title,
+                expression: "from.title"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.from.title },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.from, "title", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "shortdesc" } }, [
+            _vm._v("Short description")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.from.shortdesc,
+                expression: "from.shortdesc"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.from.shortdesc },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.from, "shortdesc", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("vue-editor", {
+              model: {
+                value: _vm.from.desc,
+                callback: function($$v) {
+                  _vm.$set(_vm.from, "desc", $$v)
+                },
+                expression: "from.desc"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-success", attrs: { type: "submit" } },
+          [_vm._v("Submit your Domain")]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "category" } }, [
-        _vm._v("Select a category")
-      ]),
-      _vm._v(" "),
-      _c("select", {
-        staticClass: "form-control",
-        attrs: { name: "", id: "category" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "subcategory" } }, [
-        _vm._v("Select a subcategory if you wish")
-      ]),
-      _vm._v(" "),
-      _c("select", {
-        staticClass: "form-control",
-        attrs: { name: "", id: "subcategory" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "form-group col-md-6" }, [
-        _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "email",
-            placeholder: "Please enter your email Address"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-6" }, [
-        _c("label", { attrs: { for: "url" } }, [
-          _vm._v("Enter your Domian URL")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "https://ypur-domain.com" }
-        })
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -51292,30 +51520,6 @@ var staticRenderFns = [
         staticClass: "form-control-file",
         attrs: { type: "file", id: "img" }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "title" } }, [
-        _vm._v("Title of your domain")
-      ]),
-      _vm._v(" "),
-      _c("input", { staticClass: "form-control", attrs: { type: "text" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "shortdesc" } }, [
-        _vm._v("Short description")
-      ]),
-      _vm._v(" "),
-      _c("input", { staticClass: "form-control", attrs: { type: "text" } })
     ])
   }
 ]
@@ -64448,9 +64652,11 @@ module.exports = function(module) {
 /*!******************************!*\
   !*** ./resources/js/Form.js ***!
   \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -64509,7 +64715,7 @@ var Errors = /*#__PURE__*/function () {
   }, {
     key: "record",
     value: function record(errors) {
-      this.errors = errors;
+      this.errors = errors.errors;
     }
     /**
      * Clear one or all error fields.
@@ -64675,6 +64881,8 @@ var Form = /*#__PURE__*/function () {
   return Form;
 }();
 
+/* harmony default export */ __webpack_exports__["default"] = (Form);
+
 /***/ }),
 
 /***/ "./resources/js/app.js":
@@ -64687,7 +64895,6 @@ var Form = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Form */ "./resources/js/Form.js");
-/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Form__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue2_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-editor */ "./node_modules/vue2-editor/dist/vue2-editor.esm.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -64699,7 +64906,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
-window.Form = _Form__WEBPACK_IMPORTED_MODULE_0___default.a;
+window.Form = _Form__WEBPACK_IMPORTED_MODULE_0__["default"];
 Vue.use(vue2_editor__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /**
  * The following block of code may be used to automatically register your

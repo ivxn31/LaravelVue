@@ -8,6 +8,6 @@
             </div>
         </div>
 
-        <domain-register></domain-register>
+    <domain-register :categories="{{ $categories }}" :subcategories="{{ $subcategories }}"></domain-register>
     </div>
 @endsection

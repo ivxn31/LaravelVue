@@ -1960,7 +1960,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['categories', 'subcategories'],
   data: function data() {
@@ -51359,8 +51358,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.from.email,
-                  expression: "from.email"
+                  value: _vm.form.email,
+                  expression: "form.email"
                 }
               ],
               staticClass: "form-control",
@@ -51368,13 +51367,13 @@ var render = function() {
                 type: "email",
                 placeholder: "Please enter your email Address"
               },
-              domProps: { value: _vm.from.email },
+              domProps: { value: _vm.form.email },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.from, "email", $event.target.value)
+                  _vm.$set(_vm.form, "email", $event.target.value)
                 }
               }
             })
@@ -51390,14 +51389,14 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.from.url,
-                  expression: "from.url"
+                  value: _vm.form.url,
+                  expression: "form.url"
                 }
               ],
               staticClass: "form-control",
-              class: { "is-valid": _vm.form.errors.has("url") },
-              attrs: { type: "text", placeholder: "https://ypur-domain.com" },
-              domProps: { value: _vm.from.url },
+              class: { "is-invalid": _vm.form.errors.has("url") },
+              attrs: { type: "text", placeholder: "https://your-domain.com" },
+              domProps: { value: _vm.form.url },
               on: {
                 keydown: function($event) {
                   return _vm.form.errors.clear("url")
@@ -51406,7 +51405,7 @@ var render = function() {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.from, "url", $event.target.value)
+                  _vm.$set(_vm.form, "url", $event.target.value)
                 }
               }
             }),
@@ -51416,8 +51415,8 @@ var render = function() {
                 {
                   name: "show",
                   rawName: "v-show",
-                  value: _vm.from.errors.has("url"),
-                  expression: "from.errors.has('url')"
+                  value: _vm.form.errors.has("url"),
+                  expression: "form.errors.has('url')"
                 }
               ],
               staticClass: "invalid-feedback",
@@ -51438,19 +51437,19 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.from.title,
-                expression: "from.title"
+                value: _vm.form.title,
+                expression: "form.title"
               }
             ],
             staticClass: "form-control",
             attrs: { type: "text" },
-            domProps: { value: _vm.from.title },
+            domProps: { value: _vm.form.title },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.from, "title", $event.target.value)
+                _vm.$set(_vm.form, "title", $event.target.value)
               }
             }
           })
@@ -51466,19 +51465,19 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.from.shortdesc,
-                expression: "from.shortdesc"
+                value: _vm.form.shortdesc,
+                expression: "form.shortdesc"
               }
             ],
             staticClass: "form-control",
             attrs: { type: "text" },
-            domProps: { value: _vm.from.shortdesc },
+            domProps: { value: _vm.form.shortdesc },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.from, "shortdesc", $event.target.value)
+                _vm.$set(_vm.form, "shortdesc", $event.target.value)
               }
             }
           })
@@ -51490,11 +51489,11 @@ var render = function() {
           [
             _c("vue-editor", {
               model: {
-                value: _vm.from.desc,
+                value: _vm.form.desc,
                 callback: function($$v) {
-                  _vm.$set(_vm.from, "desc", $$v)
+                  _vm.$set(_vm.form, "desc", $$v)
                 },
-                expression: "from.desc"
+                expression: "form.desc"
               }
             })
           ],

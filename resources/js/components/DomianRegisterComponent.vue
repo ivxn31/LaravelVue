@@ -18,14 +18,13 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" placeholder="Please enter your email Address" v-model="from.email">
+                    <input type="email" class="form-control" placeholder="Please enter your email Address" v-model="form.email">
                 </div>
 
                 <div class="form-group col-md-6">
                     <label for="url">Enter your Domian URL</label>
-                    <input type="text" :class="{ 'is-valid' : form.errors.has('url') }" 
-                    class="form-control" placeholder="https://ypur-domain.com" v-model="from.url" @keydown="form.errors.clear('url')">
-                    <div class="invalid-feedback" v-show="from.errors.has('url')" v-text="form.errors.get('url')"></div>
+                    <input type="text" :class="{ 'is-invalid' : form.errors.has('url') }" class="form-control" placeholder="https://your-domain.com" v-model="form.url" @keydown="form.errors.clear('url')">
+                    <div class="invalid-feedback" v-show="form.errors.has('url')" v-text="form.errors.get('url')"></div>
                 </div>
             </div>
 
@@ -35,16 +34,16 @@
 
             <div class="form-group">
                 <label for="title">Title of your domain</label>
-                <input type="text" class="form-control" v-model="from.title">
+                <input type="text" class="form-control" v-model="form.title">
             </div>
 
             <div class="form-group">
                 <label for="shortdesc">Short description</label>
-                <input type="text" class="form-control" v-model="from.shortdesc">
+                <input type="text" class="form-control" v-model="form.shortdesc">
             </div>
             
             <div class="form-group">
-                <vue-editor v-model="from.desc"/>
+                <vue-editor v-model="form.desc"/>
             </div>
 
             <button type="submit" class="btn btn-success">Submit your Domain</button>

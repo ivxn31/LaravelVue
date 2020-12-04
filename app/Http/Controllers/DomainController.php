@@ -6,6 +6,8 @@ use App\Category;
 use App\Subcategory;
 use App\Domain;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use File;
 
 class DomainController extends Controller
 {
@@ -45,8 +47,28 @@ class DomainController extends Controller
             'email' => 'required|email',
             'title' => 'required|max:60',
             'url' => 'required|max:255',
-            'shortdesc' => 'required|150'
+            'shortdesc' => 'required|max:150'
         ]);
+
+        $domain = new Domain();
+        $domain->title = $request['title'];
+        $domain->email = $request['email'];
+        $domain->url = $request['url'];
+        $domain->shortdescription = $request['shortdesc'];
+        $domain->description = $request['desc'];
+        $domain->category_id = $request['category_id'];
+        $domain->subcategory_id = $request['subcategory_id'];
+        if($request['img']){
+            $image = $request['img'];
+            $extension = $image->getClientOriginalExtension();
+            $name = time().'_'.$image->getClientOriginalName();
+            Storage::disk('public')->put($name,File::get($image));
+            $domain->img = $name;
+        }else{
+            $domain->img = 'default.jpg';
+        }
+
+        $domain->save();
     }
 
     /**

@@ -1960,6 +1960,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['categories', 'subcategories'],
   data: function data() {
@@ -51363,12 +51369,16 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
+              class: { "is-invalid": _vm.form.errors.has("email") },
               attrs: {
                 type: "email",
                 placeholder: "Please enter your email Address"
               },
               domProps: { value: _vm.form.email },
               on: {
+                keydown: function($event) {
+                  return _vm.form.errors.clear("email")
+                },
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -51376,6 +51386,19 @@ var render = function() {
                   _vm.$set(_vm.form, "email", $event.target.value)
                 }
               }
+            }),
+            _vm._v(" "),
+            _c("div", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.form.errors.has("email"),
+                  expression: "form.errors.has('email')"
+                }
+              ],
+              staticClass: "invalid-feedback",
+              domProps: { textContent: _vm._s(_vm.form.errors.get("email")) }
             })
           ]),
           _vm._v(" "),
@@ -51442,9 +51465,13 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
+            class: { "is-invalid": _vm.form.errors.has("title") },
             attrs: { type: "text" },
             domProps: { value: _vm.form.title },
             on: {
+              keydown: function($event) {
+                return _vm.form.errors.clear("title")
+              },
               input: function($event) {
                 if ($event.target.composing) {
                   return
@@ -51452,6 +51479,19 @@ var render = function() {
                 _vm.$set(_vm.form, "title", $event.target.value)
               }
             }
+          }),
+          _vm._v(" "),
+          _c("div", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.form.errors.has("title"),
+                expression: "form.errors.has('title')"
+              }
+            ],
+            staticClass: "invalid-feedback",
+            domProps: { textContent: _vm._s(_vm.form.errors.get("title")) }
           })
         ]),
         _vm._v(" "),
@@ -51470,9 +51510,13 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
+            class: { "is-invalid": _vm.form.errors.has("shortdesc") },
             attrs: { type: "text" },
             domProps: { value: _vm.form.shortdesc },
             on: {
+              keydown: function($event) {
+                return _vm.form.errors.clear("shortdesc")
+              },
               input: function($event) {
                 if ($event.target.composing) {
                   return
@@ -51480,6 +51524,19 @@ var render = function() {
                 _vm.$set(_vm.form, "shortdesc", $event.target.value)
               }
             }
+          }),
+          _vm._v(" "),
+          _c("div", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.form.errors.has("shortdesc"),
+                expression: "form.errors.has('shortdesc')"
+              }
+            ],
+            staticClass: "invalid-feedback",
+            domProps: { textContent: _vm._s(_vm.form.errors.get("shortdesc")) }
           })
         ]),
         _vm._v(" "),

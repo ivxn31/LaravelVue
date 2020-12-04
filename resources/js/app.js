@@ -24,7 +24,7 @@ Vue.use(Vue2Editor);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-//Vue.component('show-category-component', require('./components/ShowCategoryComponent.vue').default);
+Vue.component('show-category-component', require('./components/ShowCategoryComponent.vue').default);
 Vue.component('domain-register', require('./components/DomainRegisterComponent.vue').default);
 Vue.component('domain-display', require('./components/DomainDisplayComponent.vue').default);
 

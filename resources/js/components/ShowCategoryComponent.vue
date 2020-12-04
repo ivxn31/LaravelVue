@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>From Vue.js</h1>
         <div v-for="category in this.categories">
             <h4>{{ category.name }}</h4>
             <ul>

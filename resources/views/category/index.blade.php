@@ -15,14 +15,6 @@
                 </div>
 
                 <div class="card-body">
-                    @foreach($categories as $category)
-                      <h4>{{ $category->name }}</h4>
-                      <ul>
-                      @foreach($category->subcategories as $subcat)
-                        <li>{{ $subcat->name }}</li>
-                      @endforeach
-                      </ul>
-                    @endforeach
                     <show-category-component :categories="{{ $categories }}"></show-category-component>
                 </div>
             </div>
